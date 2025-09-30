@@ -6,6 +6,24 @@ from tqdm import tqdm
 import webbrowser
 
 # ============================================================================
+# PATH CONFIGURATION
+# ============================================================================
+SOURCE_DIR = "source"
+OUTPUT_BASE_DIR = "output"
+
+# Input files
+file = os.path.join(SOURCE_DIR, "source_CRPM_check.xlsx")
+exceptions_file = os.path.join(SOURCE_DIR, "source_CRPM_exceptions.xlsx")
+
+# Clean timestamp: YYYY-MM-DD_HHMM
+timestamp = datetime.now().strftime("%Y-%m-%d_%H%M")
+
+# Output directory → e.g. output/2025-09-30_1615
+output_dir = os.path.join(OUTPUT_BASE_DIR, timestamp)
+os.makedirs(output_dir, exist_ok=True)
+
+
+# ============================================================================
 # CONFIGURATION SECTION - EASY TO MODIFY
 # ============================================================================
 # Hotels that actually use city tax - modify this list as needed
@@ -736,10 +754,13 @@ def create_actionable_dashboard(results, output_dir, timestamp):
 print("🚀 Starting SIMPLIFIED ENHANCED CRPM analysis...")
 
 # Load exceptions
-exceptions_df = load_exceptions("source_CRPM_exceptions.xlsx")
+exceptions_df = load_exceptions(exceptions_file)
 
 # Load data
-file = "source_CRPM_check.xlsx"
+print("📊 Loading data files...")
+data = pd.read_excel(file, sheet_name="data", dtype=str)
+standard = pd.read_excel(file, sheet_name="standard", dtype=str)
+
 try:
     print("📊 Loading data files...")
     data = pd.read_excel(file, sheet_name="data", dtype=str)
@@ -912,11 +933,6 @@ print(f"City tax checks skipped (non-applicable hotels): {city_tax_skipped:,}")
 
 if suggestions:
     print(f"🤖 Suggested new exception rules: {len(suggestions)}")
-
-# Create outputs
-timestamp = datetime.now().strftime("%Y%m%d_%H%M")
-output_dir = f"output_{timestamp}"
-os.makedirs(output_dir, exist_ok=True)
 
 files_created = []
 

@@ -1,0 +1,400 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRPM Action Dashboard - 2025-09-30_1638</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .dashboard {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+        .header h1 {
+            color: #333;
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+        .key-insights {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            color: #333;
+        }
+        .key-insights h2 {
+            margin: 0 0 15px 0;
+            color: #d63384;
+        }
+        .insight-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .insight-card {
+            background: rgba(255,255,255,0.9);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .insight-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #d63384;
+            margin: 10px 0;
+        }
+        .quick-wins {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        .quick-wins h2 {
+            color: #155724;
+            margin: 0 0 15px 0;
+        }
+        .hotel-card {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .hotel-info h4 {
+            margin: 0;
+            color: #333;
+        }
+        .hotel-info p {
+            margin: 5px 0 0 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .issue-count {
+            background: #dc3545;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        .pattern-insights {
+            background: #e3f2fd;
+            border: 2px solid #2196f3;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        .pattern-insights h2 {
+            color: #1976d2;
+            margin: 0 0 15px 0;
+        }
+        .pattern-card {
+            background: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border-left: 4px solid #2196f3;
+        }
+        .pattern-card h4 {
+            margin: 0 0 10px 0;
+            color: #1976d2;
+        }
+        .impact-badge {
+            background: #2196f3;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        .action-plan {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        .action-plan h2 {
+            color: #856404;
+            margin: 0 0 15px 0;
+        }
+        .action-step {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+        }
+        .action-step h4 {
+            margin: 0 0 5px 0;
+            color: #856404;
+        }
+        .priority-high { color: #dc3545; font-weight: bold; }
+        .priority-medium { color: #ffc107; font-weight: bold; }
+        .priority-low { color: #28a745; font-weight: bold; }
+        .efficiency-meter {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .efficiency-bar {
+            background: #e9ecef;
+            height: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .efficiency-fill {
+            background: linear-gradient(90deg, #28a745, #20c997);
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="header">
+            <h1>🎯 CRPM Action Dashboard</h1>
+            <div class="subtitle">Focus on What Matters Most - September 30, 2025</div>
+        </div>
+        
+        <!-- METRICS SUMMARY BAR -->
+        <div class="metrics-bar">
+            <div class="metric-box">
+                <h3 class="metric-label">Total Rate Plans</h3>
+                <p class="metric-value">15,847</p>
+            </div>
+            <div class="metric-box">
+                <h3 class="metric-label">Compliance Rate</h3>
+                <p class="metric-value">99.8%</p>
+            </div>
+            <div class="metric-box">
+                <h3 class="metric-label">Issues to Fix</h3>
+                <p class="metric-value">25</p>
+            </div>
+            <div class="metric-box">
+                <h3 class="metric-label">Accepted Deviations</h3>
+                <p class="metric-value">530</p>
+            </div>
+        </div>
+        
+        <!-- KEY INSIGHTS SECTION -->
+        <div class="key-insights">
+            <h2>🚀 Key Insights - What You Need to Know</h2>
+            <div class="insight-grid">
+                <div class="insight-card">
+                    <div class="insight-number">56%</div>
+                    <p><strong>Quick Win Impact</strong><br>Fixing top 5 hotels = 56% improvement</p>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-number">2</div>
+                    <p><strong>Automation Opportunities</strong><br>5 issues could be auto-fixed</p>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-number">95%</div>
+                    <p><strong>Current Automation</strong><br>530 deviations auto-approved</p>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-number">10</div>
+                    <p><strong>Focus Hotels</strong><br>These hotels need immediate attention</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- QUICK WINS SECTION -->
+        <div class="quick-wins">
+            <h2>🎯 Quick Wins - Fix These First (80/20 Rule)</h2>
+            <p><strong>Strategy:</strong> These 5 hotels account for 14 issues (56% of all problems). Fix these for maximum impact!</p>
+            
+            
+            
+            <div class="hotel-card">
+                <div class="hotel-info">
+                    <h4>Hotel NYB</h4>
+                    <p>1 countries • Priority: Medium</p>
+                    <p><strong>Sample issues:</strong> City Tax: 'No' → 'Yes'</p>
+                </div>
+                <div class="issue-count">4 issues</div>
+            </div>
+            
+            <div class="hotel-card">
+                <div class="hotel-info">
+                    <h4>Hotel NYT</h4>
+                    <p>1 countries • Priority: Medium</p>
+                    <p><strong>Sample issues:</strong> City Tax: 'No' → 'Yes'</p>
+                </div>
+                <div class="issue-count">4 issues</div>
+            </div>
+            
+            <div class="hotel-card">
+                <div class="hotel-info">
+                    <h4>Hotel AMS</h4>
+                    <p>1 countries • Priority: Medium</p>
+                    <p><strong>Sample issues:</strong> City Tax: 'No' → 'Yes'</p>
+                </div>
+                <div class="issue-count">2 issues</div>
+            </div>
+            
+            <div class="hotel-card">
+                <div class="hotel-info">
+                    <h4>Hotel AMZ</h4>
+                    <p>1 countries • Priority: Medium</p>
+                    <p><strong>Sample issues:</strong> City Tax: 'No' → 'Yes'</p>
+                </div>
+                <div class="issue-count">2 issues</div>
+            </div>
+            
+            <div class="hotel-card">
+                <div class="hotel-info">
+                    <h4>Hotel KLB</h4>
+                    <p>1 countries • Priority: Medium</p>
+                    <p><strong>Sample issues:</strong> City Tax: 'No' → 'Yes'</p>
+                </div>
+                <div class="issue-count">2 issues</div>
+            </div>
+            
+            
+        </div>
+        
+        <!-- AUTOMATION OPPORTUNITIES -->
+        <div class="pattern-insights">
+            <h2>🤖 Automation Opportunities - Create These Rules</h2>
+            <p><strong>Smart Suggestion:</strong> These patterns appear frequently. Create exception rules to handle them automatically.</p>
+            
+            
+            
+            <div class="pattern-card">
+                <div class="impact-badge">Would fix 4 issues automatically</div>
+                <h4>Vat Without To Reduced</h4>
+                <p><strong>Scope:</strong> 4 hotels across 2 countries</p>
+                <p><strong>Examples:</strong> AMS (NL), AMZ (NL), KLB (MY)</p>
+                <p><strong>Recommended Rule:</strong> Create a Hotel_Pattern exception for this deviation</p>
+            </div>
+            
+            <div class="pattern-card">
+                <div class="impact-badge">Would fix 1 issues automatically</div>
+                <h4>Subaccount 108000A To 108000</h4>
+                <p><strong>Scope:</strong> 1 hotels across 1 countries</p>
+                <p><strong>Examples:</strong> CDT (US)</p>
+                <p><strong>Recommended Rule:</strong> Create a Country_Pattern exception for this deviation</p>
+            </div>
+            
+            
+        </div>
+        
+        <!-- REGIONAL FOCUS -->
+        <div class="pattern-insights">
+            <h2>🌍 Regional Focus - Where to Concentrate Efforts</h2>
+            
+            
+            <div class="pattern-card">
+                <h4>US - 9 issues</h4>
+                <p><strong>Hotels affected:</strong> 3 hotels need attention</p>
+                <p><strong>Main problems:</strong> City Tax (8), Subaccount (1)</p>
+                <p><strong>Action:</strong> Mixed issues - needs detailed review</p>
+            </div>
+            
+            <div class="pattern-card">
+                <h4>NL - 7 issues</h4>
+                <p><strong>Hotels affected:</strong> 4 hotels need attention</p>
+                <p><strong>Main problems:</strong> City Tax (4), VAT (3)</p>
+                <p><strong>Action:</strong> Mixed issues - needs detailed review</p>
+            </div>
+            
+            <div class="pattern-card">
+                <h4>FR - 4 issues</h4>
+                <p><strong>Hotels affected:</strong> 4 hotels need attention</p>
+                <p><strong>Main problems:</strong> City Tax (4)</p>
+                <p><strong>Action:</strong> Mixed issues - needs detailed review</p>
+            </div>
+            
+            <div class="pattern-card">
+                <h4>CH - 2 issues</h4>
+                <p><strong>Hotels affected:</strong> 2 hotels need attention</p>
+                <p><strong>Main problems:</strong> City Tax (2)</p>
+                <p><strong>Action:</strong> Mixed issues - needs detailed review</p>
+            </div>
+            
+            <div class="pattern-card">
+                <h4>MY - 2 issues</h4>
+                <p><strong>Hotels affected:</strong> 1 hotels need attention</p>
+                <p><strong>Main problems:</strong> City Tax (1), VAT (1)</p>
+                <p><strong>Action:</strong> Mixed issues - needs detailed review</p>
+            </div>
+            
+            
+        </div>
+        
+        <!-- ACTION PLAN -->
+        <div class="action-plan">
+            <h2>📋 Your 30-Day Action Plan</h2>
+            
+            <div class="action-step">
+                <h4>Week 1: Quick Wins (Immediate Impact)</h4>
+                <p>• Review top 3 hotels: NYB, NYT, AMS</p>
+                <p>• Expected impact: Fix ~10 issues (40% improvement)</p>
+            </div>
+            
+            <div class="action-step">
+                <h4>Week 2-3: Automation Rules</h4>
+                <p>• Implement 2 new exception rules for top patterns</p>
+                <p>• Expected impact: Auto-handle 5 future similar issues</p>
+            </div>
+            
+            <div class="action-step">
+                <h4>Week 4: Regional Focus</h4>
+                <p>• Address US issues systematically</p>
+                <p>• Set up monitoring for early detection of similar patterns</p>
+            </div>
+            
+            <div class="action-step">
+                <h4>Ongoing: Monitor & Optimize</h4>
+                <p>• Target: Achieve 98% compliance rate</p>
+                <p>• Review exception rule effectiveness monthly</p>
+            </div>
+        </div>
+        
+        <!-- EFFICIENCY TRACKING -->
+        <div class="efficiency-meter">
+            <h3>🚀 Automation Efficiency</h3>
+            <p>Your exception rules are handling <strong>95%</strong> of deviations automatically</p>
+            <div class="efficiency-bar">
+                <div class="efficiency-fill" style="width: 95.4954954954955%"></div>
+            </div>
+            <p><small>530 auto-approved • 25 need manual review • Target: 95% automation</small></p>
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px; color: #666; font-size: 0.9rem;">
+            <p>📊 Actionable CRPM Dashboard - Focus on Impact, Not Just Data</p>
+            <p>Next recommended review: October 07, 2025</p>
+        </div>
+    </div>
+</body>
+</html>
