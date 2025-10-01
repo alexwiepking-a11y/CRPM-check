@@ -440,6 +440,36 @@ def create_actionable_dashboard(results, output_dir, timestamp):
             font-size: 1.1rem;
             margin-top: 10px;
         }}
+        .metrics-bar {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }}
+        .metric-box {{
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }}
+        .metric-box:hover {{
+            transform: translateY(-5px);
+        }}
+        .metric-label {{
+            font-size: 0.9rem;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0 0 10px 0;
+        }}
+        .metric-value {{
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0;
+        }}
         .key-insights {{
             background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
             padding: 25px;
@@ -582,51 +612,51 @@ def create_actionable_dashboard(results, output_dir, timestamp):
     </style>
 </head>
 <body>
-    <div class="dashboard">
-        <div class="header">
-            <h1>🎯 CRPM Action Dashboard</h1>
-            <div class="subtitle">Focus on What Matters Most - {datetime.now().strftime('%B %d, %Y')}</div>
+<div class="dashboard">
+    <div class="header">
+        <h1>🎯 CRPM Action Dashboard</h1>
+        <div class="subtitle">Focus on What Matters Most - {datetime.now().strftime('%B %d, %Y')}</div>
+    </div>
+
+    <!-- METRICS SUMMARY BAR -->
+    <div class="metrics-bar">
+        <div class="metric-box">
+            <h3 class="metric-label">Total Rate Plans</h3>
+            <p class="metric-value">{total_entries:,}</p>
         </div>
-        
-        <!-- METRICS SUMMARY BAR -->
-        <div class="metrics-bar">
-            <div class="metric-box">
-                <h3 class="metric-label">Total Rate Plans</h3>
-                <p class="metric-value">{total_entries:,}</p>
-            </div>
-            <div class="metric-box">
-                <h3 class="metric-label">Compliance Rate</h3>
-                <p class="metric-value">{compliance_rate:.1f}%</p>
-            </div>
-            <div class="metric-box">
-                <h3 class="metric-label">Issues to Fix</h3>
-                <p class="metric-value">{issues_count:,}</p>
-            </div>
-            <div class="metric-box">
-                <h3 class="metric-label">Accepted Deviations</h3>
-                <p class="metric-value">{accepted_count:,}</p>
-            </div>
+        <div class="metric-box">
+            <h3 class="metric-label">Compliance Rate</h3>
+            <p class="metric-value">{compliance_rate:.1f}%</p>
         </div>
-        
-        <!-- KEY INSIGHTS SECTION -->
-        <div class="key-insights">
-            <h2>🚀 Key Insights - What You Need to Know</h2>
-            <div class="insight-grid">
-                <div class="insight-card">
-                    <div class="insight-number">{impact_percentage:.0f}%</div>
-                    <p><strong>Quick Win Impact</strong><br>Fixing top 5 hotels = {impact_percentage:.0f}% improvement</p>
-                </div>
-                <div class="insight-card">
-                    <div class="insight-number">{len(top_patterns)}</div>
-                    <p><strong>Automation Opportunities</strong><br>{sum(p[1]['count'] for p in top_patterns)} issues could be auto-fixed</p>
-                </div>
-                <div class="insight-card">
-                    <div class="insight-number">{rule_efficiency['efficiency_rate']:.0f}%</div>
-                    <p><strong>Current Automation</strong><br>{accepted_count:,} deviations auto-approved</p>
-                </div>
-                <div class="insight-card">
-                    <div class="insight-number">{len(top_problem_hotels)}</div>
-                    <p><strong>Focus Hotels</strong><br>These hotels need immediate attention</p>
+        <div class="metric-box">
+            <h3 class="metric-label">Issues to Fix</h3>
+            <p class="metric-value">{issues_count:,}</p>
+        </div>
+        <div class="metric-box">
+            <h3 class="metric-label">Accepted Deviations</h3>
+            <p class="metric-value">{accepted_count:,}</p>
+        </div>
+    </div>
+
+    <!-- KEY INSIGHTS SECTION -->
+    <div class="key-insights">
+        <h2>🚀 Key Insights - What You Need to Know</h2>
+        <div class="insight-grid">
+            <div class="insight-card">
+                <div class="insight-number">{impact_percentage:.0f}%</div>
+                <p><strong>Quick Win Impact</strong><br>Fixing top 5 hotels = {impact_percentage:.0f}% improvement</p>
+            </div>
+            <div class="insight-card">
+                <div class="insight-number">{len(top_patterns)}</div>
+                <p><strong>Automation Opportunities</strong><br>{sum(p[1]['count'] for p in top_patterns)} issues could be auto-fixed</p>
+            </div>
+            <div class="insight-card">
+                <div class="insight-number">{rule_efficiency['efficiency_rate']:.0f}%</div>
+                <p><strong>Current Automation</strong><br>{accepted_count:,} deviations auto-approved</p>
+            </div>
+            <div class="insight-card">
+                <div class="insight-number">{len(top_problem_hotels)}</div>
+                <p><strong>Focus Hotels</strong><br>These hotels need immediate attention
                 </div>
             </div>
         </div>
@@ -745,10 +775,9 @@ def create_actionable_dashboard(results, output_dir, timestamp):
 </body>
 </html>
 """
-    
+    dashboard_file = os.path.join(output_dir, f"CRPM_Dashboard_{timestamp}.html")
     with open(dashboard_file, 'w', encoding='utf-8') as f:
         f.write(html_content)
-    
     return dashboard_file
 
 print("🚀 Starting SIMPLIFIED ENHANCED CRPM analysis...")
