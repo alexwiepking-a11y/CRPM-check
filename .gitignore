@@ -1,0 +1,27 @@
+# Virtual environment
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.code-workspace
+
+# Output files - ALL results
+output/
+
+# Backup files
+*backup*
+*- backup.*
+
+# VS Code settings
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Excel temporary files
+~$*.xlsx
+~$*.xls
