@@ -302,7 +302,7 @@ def create_actionable_dashboard(results, output_dir, timestamp):
 <div class="dashboard">
     <div class="header">
         <h1>🎯 CRPM Action Dashboard</h1>
-        <div class="subtitle">Focus on What Matters Most - {datetime.now().strftime('%B %d, %Y')}</div>
+        <div class="subtitle">Focus on what matters most - {datetime.now().strftime('%B %d, %Y')}</div>
     </div>
 
     <!-- METRICS SUMMARY BAR -->
