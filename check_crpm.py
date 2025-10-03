@@ -397,3 +397,8 @@ logging.info(f"   • To skip auto-opening browser, set AUTO_OPEN_DASHBOARD = Fa
 logging.info(f"   • Current city tax hotels: {len(CITY_TAX_HOTELS)} configured")
 
 logging.info("\n🏁 Simplified enhanced analysis complete!")
+
+
+import os
+
+os.makedirs(os.path.dirname(exceptions_file), exist_ok=True)
