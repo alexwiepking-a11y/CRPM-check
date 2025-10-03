@@ -87,6 +87,11 @@ def create_actionable_dashboard(results, output_dir, timestamp):
     
     top_countries = sorted(country_analysis.items(), key=lambda x: x[1]['issues'], reverse=True)[:5]
     
+    # Precompute values to avoid division by zero
+    top_3_fix_count = sum(count for _, count in top_problem_hotels[:3])
+    top_3_impact_pct = (top_3_fix_count / issues_count * 100) if issues_count > 0 else 0
+    top_2_pattern_count = sum(data['count'] for _, data in top_patterns[:2])
+    
     # Create the HTML with ACTIONABLE insights
     html_content = f"""
 <!DOCTYPE html>
@@ -417,18 +422,32 @@ def create_actionable_dashboard(results, output_dir, timestamp):
         
         <!-- ACTION PLAN -->
         <div class="action-plan">
+            {'''
+            <h2>🎉 Perfect Compliance Achieved!</h2>
+            <div class="action-step">
+                <h4>Congratulations!</h4>
+                <p>• All rate plans are fully compliant.</p>
+                <p>• No issues to fix.</p>
+            </div>
+            <div class="action-step">
+                <h4>Ongoing Maintenance</h4>
+                <p>• Continue monitoring for any new deviations.</p>
+                <p>• Review exception rules periodically.</p>
+                <p>• Target: Maintain 100% compliance rate.</p>
+            </div>
+            ''' if issues_count == 0 else f'''
             <h2>📋 Your 30-Day Action Plan</h2>
             
             <div class="action-step">
                 <h4>Week 1: Quick Wins (Immediate Impact)</h4>
-                <p>• Review top {min(3, len(top_problem_hotels))} hotels: {', '.join([hotel for hotel, _ in top_problem_hotels[:3]])}</p>
-                <p>• Expected impact: Fix ~{sum(count for _, count in top_problem_hotels[:3])} issues ({sum(count for _, count in top_problem_hotels[:3])/issues_count*100:.0f}% improvement)</p>
+                <p>• Review top {min(3, len(top_problem_hotels))} hotels: {', '.join([hotel for hotel, _ in top_problem_hotels[:3]]) if top_problem_hotels else 'N/A'}</p>
+                <p>• Expected impact: Fix ~{top_3_fix_count} issues ({top_3_impact_pct:.0f}% improvement)</p>
             </div>
             
             <div class="action-step">
                 <h4>Week 2-3: Automation Rules</h4>
                 <p>• Implement {min(2, len(top_patterns))} new exception rules for top patterns</p>
-                <p>• Expected impact: Auto-handle {sum(data['count'] for _, data in top_patterns[:2])} future similar issues</p>
+                <p>• Expected impact: Auto-handle {top_2_pattern_count} future similar issues</p>
             </div>
             
             <div class="action-step">
@@ -442,6 +461,7 @@ def create_actionable_dashboard(results, output_dir, timestamp):
                 <p>• Target: Achieve {min(98, compliance_rate + 5):.0f}% compliance rate</p>
                 <p>• Review exception rule effectiveness monthly</p>
             </div>
+            '''}
         </div>
         
         <!-- EFFICIENCY TRACKING -->
